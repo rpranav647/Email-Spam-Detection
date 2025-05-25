@@ -1,0 +1,1 @@
+pip install streamlit joblib tensorflow transformers numpy scikit-learn h5py
