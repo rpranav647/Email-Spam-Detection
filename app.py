@@ -1,50 +1,9 @@
-# import streamlit as st
-# import joblib
-# import os
-
-# # Load the CountVectorizer
-# vectorizer = joblib.load("vectorizer.pkl")
-
-# # Load all models
-# model_paths = {
-#     "Logistic Regression": "saved_models/logistic_regression_model.pkl",
-#     "K-Nearest Neighbors": "saved_models/k-nearest_neighbors_model.pkl",
-#     "Support Vector Machine": "saved_models/support_vector_machine_model.pkl",
-#     "Random Forest": "saved_models/random_forest_model.pkl",
-# }
-
-# models = {name: joblib.load(path) for name, path in model_paths.items()}
-
-# # Streamlit App
-# st.title("📨 Spam Message Classifier")
-
-# st.write("This app predicts whether a message is **Spam** or **Ham (Not Spam)** using different ML models.")
-
-# # User input
-# message = st.text_area("Enter your message here:")
-
-# model_choice = st.selectbox("Choose a model:", list(models.keys()))
-
-# if st.button("Predict"):
-#     if message.strip() == "":
-#         st.warning("Please enter a message to classify.")
-#     else:
-#         # Transform the input message
-#         vect_msg = vectorizer.transform([message]).toarray()
-
-#         # Predict
-#         prediction = models[model_choice].predict(vect_msg)[0]
-#         label = "📩 Ham (Not Spam)" if prediction == 0 else "🚫 Spam"
-
-#         st.markdown(f"### Prediction: {label}")
-
-
 import streamlit as st
 import joblib
 
 # Title
 st.title("📩 Spam Message Classifier")
-st.write("Enter a message and choose a model + vectorizer to predict if it's **Spam** or **Ham**.")
+st.write("Enter a message and choose a model + vectorizer to predict if it's *Spam* or *Ham*.")
 
 # Load available model names
 model_names = [
@@ -78,8 +37,7 @@ if st.button("Predict"):
         label = "🟢 Ham" if prediction == 0 else "🔴 Spam"
 
         st.subheader("Prediction:")
-
+        st.success(label) if prediction == 0 else st.error(label)
 
     except FileNotFoundError:
-        st.error("Model or vectorizer not found. Please ensure all `.pkl` files are in the same directory.")
-
+        st.error("Model or vectorizer not found. Please ensure all .pkl files are in the same directory.")
